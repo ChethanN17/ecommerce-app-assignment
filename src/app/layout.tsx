@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { StoreProvider } from "./context/StoreContext";
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
   title: "E-Commerce App",
@@ -16,10 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StoreProvider>
-          <header style={{ background: "#0070f3", color: "white", padding: "1rem" }}>
-            <nav style={{ display: "flex", justifyContent: "space-between" }}>
+          <header className={styles.header}>
+            <nav className={styles.nav}>
               <h1>ShopEasy</h1>
-              <div style={{ display: "flex", gap: "1rem" }}>
+              <div className={styles.navLinks}>
                 <a href="/">Home</a>
                 <a href="/cart">Cart</a>
                 <a href="/wishlist">Wishlist</a>
@@ -28,9 +29,9 @@ export default function RootLayout({
             </nav>
           </header>
 
-          <main style={{ padding: "1rem" }}>{children}</main>
+          <main className={styles.main}>{children}</main>
 
-          <footer style={{ background: "#333", color: "white", textAlign: "center", padding: "1rem" }}>
+          <footer className={styles.footer}>
             © {new Date().getFullYear()} ShopEasy
           </footer>
         </StoreProvider>

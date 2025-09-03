@@ -1,0 +1,29 @@
+/* app/layout.module.css */
+.header {
+  background: #0070f3;
+  color: white;
+  padding: 1rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.main {
+  padding: 1rem;
+}
