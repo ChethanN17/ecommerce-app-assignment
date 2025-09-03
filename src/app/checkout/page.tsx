@@ -1,3 +1,10 @@
+import CheckoutForm from "./CheckoutForm";
+
 export default function CheckoutPage() {
-  return <h2>Checkout</h2>;
+  return (
+    <div>
+      <h1>Checkout</h1>
+      <CheckoutForm />
+    </div>
+  );
 }

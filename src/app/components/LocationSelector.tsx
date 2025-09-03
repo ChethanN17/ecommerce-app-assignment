@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocation } from "@/app/context/LocationContext";
-import { useState } from "react";
+import {  useState } from "react";
 import styles from "./LocationSelector.module.css";
 
 const cities = ["Bengaluru", "Mumbai", "Delhi", "Chennai", "Hyderabad"];
@@ -20,8 +20,8 @@ export default function LocationSelector() {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        // Just for demo: real app would call a geocoding API
-        setLocation(`Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)}`);
+        const detected = `Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)}`;
+        setLocation(detected);
         setAutoDetecting(false);
       },
       () => {
@@ -35,17 +35,20 @@ export default function LocationSelector() {
     <div className={styles.container}>
       <label>Select Delivery Location: </label>
       <select
-        value={location || ""}
+        value={location && cities.includes(location) ? location : ""}
         onChange={(e) => setLocation(e.target.value)}
         className={styles.dropdown}
       >
         <option value="">-- Choose City --</option>
         {cities.map((city) => (
-          <option key={city} value={city}>{city}</option>
+          <option key={city} value={city}>
+            {city}
+          </option>
         ))}
       </select>
 
       <button
+        type="button"
         className={styles.button}
         onClick={handleDetectLocation}
         disabled={autoDetecting}

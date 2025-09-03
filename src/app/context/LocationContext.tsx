@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type LocationContextType = {
   location: string | null;
@@ -10,7 +10,21 @@ type LocationContextType = {
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
 
 export function LocationProvider({ children }: { children: ReactNode }) {
-  const [location, setLocation] = useState<string | null>(null);
+  const [location, setLocationState] = useState<string | null>(null);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("location");
+    if (stored) {
+      setLocationState(stored);
+    }
+  }, []);
+
+  // Save to localStorage whenever location changes
+  const setLocation = (loc: string) => {
+    setLocationState(loc);
+    localStorage.setItem("location", loc);
+  };
 
   return (
     <LocationContext.Provider value={{ location, setLocation }}>
