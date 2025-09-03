@@ -1,3 +1,5 @@
+import CartDetails from "./CartDetails";
+
 export default function CartPage() {
-  return <h2>Your Shopping Cart</h2>;
+  return <CartDetails />;
 }

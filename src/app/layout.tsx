@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { StoreProvider } from "./context/StoreContext";
 
 export const metadata: Metadata = {
   title: "E-Commerce App",
@@ -14,23 +15,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header style={{ background: "#0070f3", color: "white", padding: "1rem" }}>
-          <nav style={{ display: "flex", justifyContent: "space-between" }}>
-            <h1>ShopEasy</h1>
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <a href="/">Home</a>
-              <a href="/cart">Cart</a>
-              <a href="/wishlist">Wishlist</a>
-              <a href="/checkout">Checkout</a>
-            </div>
-          </nav>
-        </header>
+        <StoreProvider>
+          <header style={{ background: "#0070f3", color: "white", padding: "1rem" }}>
+            <nav style={{ display: "flex", justifyContent: "space-between" }}>
+              <h1>ShopEasy</h1>
+              <div style={{ display: "flex", gap: "1rem" }}>
+                <a href="/">Home</a>
+                <a href="/cart">Cart</a>
+                <a href="/wishlist">Wishlist</a>
+                <a href="/checkout">Checkout</a>
+              </div>
+            </nav>
+          </header>
 
-        <main style={{ padding: "1rem" }}>{children}</main>
+          <main style={{ padding: "1rem" }}>{children}</main>
 
-        <footer style={{ background: "#333", color: "white", textAlign: "center", padding: "1rem" }}>
-          © {new Date().getFullYear()} ShopEasy
-        </footer>
+          <footer style={{ background: "#333", color: "white", textAlign: "center", padding: "1rem" }}>
+            © {new Date().getFullYear()} ShopEasy
+          </footer>
+        </StoreProvider>
       </body>
     </html>
   );

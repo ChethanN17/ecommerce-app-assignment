@@ -1,3 +1,5 @@
+import WishlistDetails from "./WishlistDetails";
+
 export default function WishlistPage() {
-  return <h2>Your Wishlist</h2>;
+  return <WishlistDetails />;
 }
