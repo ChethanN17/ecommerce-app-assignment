@@ -1,0 +1,32 @@
+.container {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.dropdown {
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+}
+
+.button {
+  margin-left: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #005bb5;
+}
+
+.selected {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}

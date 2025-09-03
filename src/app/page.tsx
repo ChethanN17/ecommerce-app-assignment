@@ -1,11 +1,16 @@
 import Link from "next/link";
 import { products } from "./data/products";
 import styles from "./page.module.css";
+import LocationSelector from "./components/LocationSelector";
 
 export default function Home() {
   return (
     <main>
       <h1>Products</h1>
+
+      {/* Location Selector */}
+      <LocationSelector />
+
       <div className={styles.grid}>
         {products.map((product) => (
           <div key={product.id} className={styles.card}>
