@@ -14,7 +14,7 @@ export default function ProductDetails({ id }: { id: string }) {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
-        <Image src={product.image} alt={product.name} fill={true} objectFit="contain"  />
+        <Image src={product.image} alt={product.name} fill={true} style={{objectFit:'contain'}} />
       </div>
       <div style={{height: 16}}/>
       <h2>{product.name}</h2>

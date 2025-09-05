@@ -10,7 +10,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // 🔹 Fake user list for demo
+        // Fake user list for demo
         const user = { id: "1", name: "Test User", email: "test@example.com" };
 
         if (
@@ -19,7 +19,7 @@ const handler = NextAuth({
         ) {
           return user;
         }
-        return null; // ❌ Invalid login
+        return null; // Invalid login
       },
     }),
   ],

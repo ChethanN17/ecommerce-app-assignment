@@ -21,7 +21,7 @@ export default function Home() {
             <div style={{height: 8}} />
             <h3>{product.name}</h3>
             <p>₹{product.price}</p>
-            <Link href={`/product/${product.id}`}>View Details</Link>
+            <Link style={{textDecoration:'underline', color: 'blue'}} href={`/product/${product.id}`}>View Details</Link>
           </div>
         ))}
       </div>

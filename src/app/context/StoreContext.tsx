@@ -16,7 +16,7 @@ type StoreContextType = {
   addToWishlist: (product: Product) => void;
   removeFromCart: (id: number) => void;
   removeFromWishlist: (id: number) => void;
-  clearCart: () => void;   // ✅ new
+  clearCart: () => void;
   clearWishlist: () => void; 
 };
 
@@ -56,12 +56,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem("cart"); // ✅ clear storage too
+    localStorage.removeItem("cart");
   };
 
   const clearWishlist = () => {
   setWishlist([]);
-  localStorage.removeItem("wishlist"); // ✅ clear storage too
+  localStorage.removeItem("wishlist");
 };
 
   const addToWishlist = (product: Product) => {

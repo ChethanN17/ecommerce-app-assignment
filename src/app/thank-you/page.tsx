@@ -19,14 +19,14 @@ export default function ThankYouPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>🎉 Thank You for Your Order!</h1>
+      <h1 className={styles.title}>Thank You for Your Order!</h1>
       <p className={styles.message}>We’ll deliver to: <b>{order.location || "Not set"}</b></p>
 
       <h2 className={styles.subtitle}>Order Summary</h2>
       <ul className={styles.list}>
         {order.cart.map((item: any, idx: number) => (
           <li key={idx} className={styles.listItem}>
-            {item.name} – {item.price} × {item.quantity || 1}
+            {item.name} - {item.price} * {item.quantity || 1}
           </li>
         ))}
       </ul>

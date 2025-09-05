@@ -53,11 +53,11 @@ export default function CheckoutForm() {
 
         router.push("/thank-you");
       } else {
-        setMessage("❌ Failed to place order");
+        setMessage("Failed to place order");
       }
     } catch (error) {
       console.error(error);
-      setMessage("❌ Failed to place order");
+      setMessage("Failed to place order");
     } finally {
       setLoading(false);
     }
