@@ -1,12 +1,11 @@
 "use client";
 
 import { useStore } from "@/app/context/StoreContext";
-import { products } from "@/app/data/products";
-import styles from "./ProductDetails.module.css";
+import { Product } from "@/app/data/products";
 import Image from "next/image";
+import styles from "./ProductDetails.module.css";
 
-export default function ProductDetails({ id }: { id: string }) {
-  const product = products.find((p) => p.id === +id);
+export default function ProductDetails({ product }: { product: Product }) {
   const { addToCart, addToWishlist } = useStore();
 
   if (!product) return <p>Product not found.</p>;
