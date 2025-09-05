@@ -2,6 +2,7 @@ import Link from "next/link";
 import { products } from "./data/products";
 import styles from "./page.module.css";
 import LocationSelector from "./components/LocationSelector";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -14,7 +15,10 @@ export default function Home() {
       <div className={styles.grid}>
         {products.map((product) => (
           <div key={product.id} className={styles.card}>
-            <img src={product.image} alt={product.name} className={styles.image} />
+            <div className={styles.imageContainer}>
+              <Image src={product.image} alt={product.name} fill={true} style={{objectFit: 'contain'}} />
+            </div>
+            <div style={{height: 8}} />
             <h3>{product.name}</h3>
             <p>₹{product.price}</p>
             <Link href={`/product/${product.id}`}>View Details</Link>

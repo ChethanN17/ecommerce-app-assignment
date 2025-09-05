@@ -1,55 +1,42 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-type Order = {
-  user: { name?: string; email?: string } | null;
-  location: string | null;
-  cart: { id: number; name: string; price: number }[];
-};
+import styles from "./Thankyou.module.css";
 
 export default function ThankYouPage() {
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<any>(null);
 
   useEffect(() => {
     const savedOrder = localStorage.getItem("lastOrder");
     if (savedOrder) {
       setOrder(JSON.parse(savedOrder));
-      localStorage.removeItem("lastOrder"); // ✅ clear after showing
     }
   }, []);
 
   if (!order) {
-    return (
-      <div style={{ textAlign: "center", padding: "2rem" }}>
-        <h1>🎉 Thank You for Your Order!</h1>
-        <p>No order details found.</p>
-      </div>
-    );
+    return <p>No recent order found.</p>;
   }
 
   return (
-    <div style={{ maxWidth: "600px", margin: "2rem auto", padding: "1rem" }}>
-      <h1>🎉 Thank You for Your Order!</h1>
-      <p>We’ll send updates once your items are shipped 🚚</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>🎉 Thank You for Your Order!</h1>
+      <p className={styles.message}>We’ll deliver to: <b>{order.location || "Not set"}</b></p>
 
-      <h2>Order Summary</h2>
-      <p>
-        <strong>Delivery Location:</strong> {order.location ?? "Not set"}
-      </p>
-      <p>
-        <strong>Customer:</strong>{" "}
-        {order.user?.name ?? "Guest"} ({order.user?.email})
-      </p>
-
-      <h3>Items:</h3>
-      <ul>
-        {order.cart.map((item) => (
-          <li key={item.id}>
-            {item.name} – ₹{item.price}
+      <h2 className={styles.subtitle}>Order Summary</h2>
+      <ul className={styles.list}>
+        {order.cart.map((item: any, idx: number) => (
+          <li key={idx} className={styles.listItem}>
+            {item.name} – {item.price} × {item.quantity || 1}
           </li>
         ))}
       </ul>
+
+     <p className={styles.total}>
+        Total: <b>${order.cart.reduce((sum: number, i: any) => sum + Number(i.price) * (i.quantity || 1), 0)}</b>
+      </p>
+
+
+      <a href="/" className={styles.button}>Back to Home</a>
     </div>
   );
 }

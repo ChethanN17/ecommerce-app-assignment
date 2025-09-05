@@ -1,23 +1,51 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import styles from "./Login.module.css";
 
 export default function LoginPage() {
-  const { data: session } = useSession();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  if (session) {
-    return (
-      <div>
-        <h2>Welcome, {session.user?.name}</h2>
-        <button onClick={() => signOut()}>Logout</button>
-      </div>
-    );
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+      callbackUrl: "/", // redirect after login
+    });
+
+    if (res?.error) setError("Invalid credentials");
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <button onClick={() => signIn("github")}>Sign in with GitHub</button>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Login</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          className={styles.input}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          className={styles.input}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button className={styles.button} type="submit">
+          Login
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
+      </form>
     </div>
   );
 }

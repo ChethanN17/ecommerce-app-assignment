@@ -3,6 +3,7 @@
 import { useStore } from "@/app/context/StoreContext";
 import { products } from "@/app/data/products";
 import styles from "./ProductDetails.module.css";
+import Image from "next/image";
 
 export default function ProductDetails({ id }: { id: string }) {
   const product = products.find((p) => p.id === +id);
@@ -12,7 +13,10 @@ export default function ProductDetails({ id }: { id: string }) {
 
   return (
     <div className={styles.container}>
-      <img src={product.image} alt={product.name} className={styles.image} />
+      <div className={styles.imageContainer}>
+        <Image src={product.image} alt={product.name} fill={true} objectFit="contain"  />
+      </div>
+      <div style={{height: 16}}/>
       <h2>{product.name}</h2>
       <p>₹{product.price}</p>
       <div className={styles.actions}>
