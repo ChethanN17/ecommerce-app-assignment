@@ -27,8 +27,15 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background 0.2s ease-in-out;
 }
 
 .button:hover {
   background: #005bb5;
+}
+
+.button:disabled {
+  background: #cccccc;  /* ✅ gray for disabled state */
+  cursor: not-allowed;
+  opacity: 0.7;
 }

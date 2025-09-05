@@ -6,7 +6,8 @@ import Image from "next/image";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const { addToCart, addToWishlist } = useStore();
+  const { addToCart, addToWishlist,loading } = useStore();
+
 
   if (!product) return <p>Product not found.</p>;
 
@@ -20,12 +21,14 @@ export default function ProductDetails({ product }: { product: Product }) {
       <p>₹{product.price}</p>
       <div className={styles.actions}>
         <button
+          disabled={loading}
           className={styles.button}
           onClick={() => addToCart(product)}
         >
-          Add to Cart
+        Add to Cart
         </button>
         <button
+          disabled={loading}
           className={styles.button}
           onClick={() => addToWishlist(product)}
         >

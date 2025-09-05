@@ -13,6 +13,7 @@ type StoreContextType = {
   cart: Product[];
   wishlist: Product[];
   addToCart: (product: Product) => void;
+  loading: boolean;
   addToWishlist: (product: Product) => void;
   removeFromCart: (id: number) => void;
   removeFromWishlist: (id: number) => void;
@@ -25,6 +26,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // --- persistence for cart
   useEffect(() => {
@@ -47,7 +49,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [wishlist]);
 
   const addToCart = (product: Product) => {
+    setLoading(true);
     setCart((prev) => [...prev, product]);
+    setTimeout(() => { setLoading(false); }, 500);
   };
 
   const removeFromCart = (id: number) => {
@@ -65,7 +69,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 };
 
   const addToWishlist = (product: Product) => {
+    setLoading(true);
     setWishlist((prev) => [...prev, product]);
+    setTimeout(() => { setLoading(false); }, 500);
   };
 
   const removeFromWishlist = (id: number) => {
@@ -83,6 +89,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         removeFromWishlist,
         clearCart, 
         clearWishlist,
+        loading
       }}
     >
       {children}
