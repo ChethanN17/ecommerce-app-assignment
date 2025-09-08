@@ -1,26 +1,39 @@
-import { products } from "../../data/products";
 import ProductDetails from "./ProductDetails";
 
-// Generate all product paths at build time (SSG)
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
+
+async function getProduct(id: string): Promise<Product | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/products/${id}`, {
+    next: { revalidate: 60 }, 
+  });
+
+  if (!res.ok) return null;
+  return res.json();
+}
+
 export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/products`);
+  const products: Product[] = await res.json();
+
   return products.map((p) => ({
     id: String(p.id),
   }));
 }
 
-// Server Component
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
-
-  // Find product from local mock data
-  const product = products.find((p) => String(p.id) === id);
+  const product = await getProduct(params.id);
 
   if (!product) {
-    return <p> Product not found</p>;
+    return <p>Product not found</p>;
   }
 
   return <ProductDetails product={product} />;

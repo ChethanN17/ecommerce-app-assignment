@@ -8,7 +8,7 @@ export function AuthButtons() {
   if (session) {
     return (
       <>
-        <span>Hi, {session.user?.email}</span>
+        <span>Hi, {session.user?.name}</span>
         <button onClick={() => signOut()}>Logout</button>
       </>
     );
