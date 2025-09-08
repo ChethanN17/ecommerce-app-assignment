@@ -3,6 +3,7 @@ import { AuthButtons } from "./components/AuthButtons";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { Providers } from "./providers";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "E-Commerce App",
@@ -19,10 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className={styles.nav}>
               <h1>ShopEasy</h1>
               <div className={styles.navLinks}>
-                <a href="/">Home</a>
-                <a href="/cart">Cart</a>
-                <a href="/wishlist">Wishlist</a>
-                <a href="/checkout">Checkout</a>
+                <Link href="/">Home</Link>
+                <Link href="/cart">Cart</Link>
+                <Link href="/wishlist">Wishlist</Link>
+                <Link href="/checkout">Checkout</Link>
                 <AuthButtons/>
               </div>
             </nav>

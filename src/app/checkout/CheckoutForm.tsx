@@ -43,7 +43,7 @@ export default function CheckoutForm() {
         body: JSON.stringify(orderData),
       });
 
-      const data = await res.json();
+      await res.json();
 
       if (res.ok) {
         localStorage.setItem("lastOrder", JSON.stringify(orderData));

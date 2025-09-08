@@ -2,14 +2,31 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Thankyou.module.css";
+import Link from "next/link";
+
+interface CartItem {
+  id: string | number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface Order {
+  user?: {
+    name?: string;
+    email?: string;
+  };
+  location?: string;
+  cart: CartItem[];
+}
 
 export default function ThankYouPage() {
-  const [order, setOrder] = useState<any>(null);
+  const [order, setOrder] = useState<Order | null>(null);
 
   useEffect(() => {
     const savedOrder = localStorage.getItem("lastOrder");
     if (savedOrder) {
-      setOrder(JSON.parse(savedOrder));
+      setOrder(JSON.parse(savedOrder) as Order);
     }
   }, []);
 
@@ -24,7 +41,7 @@ export default function ThankYouPage() {
 
       <h2 className={styles.subtitle}>Order Summary</h2>
       <ul className={styles.list}>
-        {order.cart.map((item: any, idx: number) => (
+        {order.cart.map((item: CartItem, idx: number) => (
           <li key={idx} className={styles.listItem}>
             {item.name} - {item.price} * {item.quantity || 1}
           </li>
@@ -32,11 +49,11 @@ export default function ThankYouPage() {
       </ul>
 
      <p className={styles.total}>
-        Total: <b>${order.cart.reduce((sum: number, i: any) => sum + Number(i.price) * (i.quantity || 1), 0)}</b>
+        Total: <b>${order.cart.reduce((sum: number, i: CartItem) => sum + Number(i.price) * (i.quantity || 1), 0)}</b>
       </p>
 
 
-      <a href="/" className={styles.button}>Back to Home</a>
+      <Link href="/" className={styles.button}>Back to Home</Link>
     </div>
   );
 }
