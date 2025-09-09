@@ -25,10 +25,9 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Products</h1>
-
       <LocationSelector />
 
+      <h1>Products</h1>
       <div className={styles.grid}>
         {products.map((product) => (
           <div key={product.id} className={styles.card}>

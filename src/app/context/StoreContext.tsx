@@ -28,7 +28,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // --- persistence for cart
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) setCart(JSON.parse(storedCart));
@@ -38,7 +37,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // --- persistence for wishlist
   useEffect(() => {
     const storedWishlist = localStorage.getItem("wishlist");
     if (storedWishlist) setWishlist(JSON.parse(storedWishlist));
